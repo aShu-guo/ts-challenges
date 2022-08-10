@@ -44,3 +44,8 @@ git config user.name "yourUsername"
 # 与你的仓库邮箱对应
 git config user.email "yourEmail@example.com"
 ```
+
+查看新增的配置
+```shell
+git config -l
+```
