@@ -1,15 +1,28 @@
-type arr1 = ['a', 'b', 'c']
-type arr2 = [3, 2, 1]
+// ============= Test Cases =============
+import type {Equal, Expect} from '../test-utils'
+
+type cases = [
+    Expect<Equal<First<[3, 2, 1]>, 3>>,
+    Expect<Equal<First<[() => 123, { a: string }]>, () => 123>>,
+    Expect<Equal<First<[]>, never>>,
+    Expect<Equal<First<[undefined]>, undefined>>,
+]
+
+type errors = [
+    // @ts-expect-error
+    First<'notArray'>,
+    // @ts-expect-error
+    First<{ 0: 'arrayLike' }>,
+]
+
+
+// ============= Your Code Here =============
 
 // 约束了First的类型之后，还可以继续约束泛型T的类型
 type First<T extends any[]> = T extends [] ? never : T[0]
 // type First<T extends any[]> = Extract<T[number], T[0]>
 // type First<T extends any[]> = T extends [infer First, ...any] ? First : never
 
-type head1 = First<arr1> // expected to be string
-type head2 = First<arr2> // expected to be number
-
-const Fun: head1 = 'a'
 
 /**
  * 为什么type First<T extends any[]> = any; 不可行
