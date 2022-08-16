@@ -1,7 +1,11 @@
-const value = Math.random() < 0.5 ? "a" : "b";
-if (value !== "a") {
-    // ...
-} else if (value === "b") {
-    // return 'false' since the types '"a"' and '"b"' have no overlap.
-    // Oops, unreachable
+type Fish = { swim: () => void };
+type Bird = { fly: () => void };
+
+function move(animal: Fish | Bird) {
+    if ("swim" in animal) {
+        return animal.swim();
+    }
+
+    return animal.fly();
 }
+
